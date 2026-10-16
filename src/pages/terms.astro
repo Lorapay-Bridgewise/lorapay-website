@@ -1,0 +1,53 @@
+---
+import Prose from '../layouts/Prose.astro';
+import { company } from '../content/company';
+---
+
+<Prose title="Terms of use" eyebrow="The small print" description="The terms for using the Lorapay website and joining its waitlist." updated={company.policyDate} draft>
+  <p class="lead">
+    These terms cover this website and the Lorapay waitlist, provided by {company.legalName} (RC {company.rcNumber}). Using the
+    Lorapay app will be covered by separate terms when it launches.
+  </p>
+
+  <h2>Lorapay is not open yet</h2>
+  <p>
+    This website describes a service that is still being built. It does not offer payment, banking or any other financial
+    service, and nothing on it is financial advice. Features, limits and launch dates may change before launch.
+    [When live: state the licensed partner that provides the payment services.]
+  </p>
+
+  <h2>The waitlist</h2>
+  <ul>
+    <li>Joining is free and doesn't oblige you to use Lorapay.</li>
+    <li>Joining doesn't guarantee access on any date, or at all. We may open by state, in stages, or by invitation.</li>
+    <li>Please give your own, accurate details. You must be 18 or older.</li>
+    <li>You can leave at any time by emailing <a href={`mailto:${company.privacyEmail}`}>{company.privacyEmail}</a>.</li>
+  </ul>
+  <p>How we handle your details is explained in our <a href="/privacy">privacy policy</a>.</p>
+
+  <h2>Using this website</h2>
+  <p>Please don't misuse the site: no attempts to break or overload it, no automated sign-ups, and no false or other people's details.</p>
+  <p>Security research is welcome under the rules on our <a href="/security#report">security page</a>.</p>
+
+  <h2>Our content</h2>
+  <p>
+    The Lorapay name, logo, designs and text on this site belong to {company.legalName}. You may share links to the site, but
+    please don't copy our branding or present yourself as Lorapay.
+  </p>
+
+  <h2>Liability</h2>
+  <p>
+    We work to keep this site accurate and available, but we provide it "as is". To the extent the law allows, we aren't liable
+    for losses arising from using it or relying on it. Nothing in these terms limits liability that can't be limited under
+    Nigerian law.
+  </p>
+
+  <h2>Changes and law</h2>
+  <p>
+    We may update these terms; the date at the top shows the latest version. These terms are governed by the laws of the Federal
+    Republic of Nigeria, and the courts of [Lagos State] have jurisdiction.
+  </p>
+
+  <h2>Contact</h2>
+  <p><a href={`mailto:${company.email}`}>{company.email}</a> · {company.address}</p>
+</Prose>

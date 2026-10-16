@@ -1,0 +1,505 @@
+---
+import Base from '../layouts/Base.astro';
+import PhoneMockup from '../components/PhoneMockup.astro';
+import WaitlistForm from '../components/WaitlistForm.astro';
+import { company } from '../content/company';
+
+const steps = [
+  { n: '01', title: 'Pay as normal', body: "Pick who to pay, enter the amount and your PIN. Lorapay notices you're offline and seals the payment so only Lorapay can open it." },
+  { n: '02', title: 'It hops phone to phone', body: 'Over Bluetooth, the payment travels through Lorapay phones nearby. They pass it on without being able to read it or change it.' },
+  { n: '03', title: 'Checked, then paid', body: 'The first phone with data delivers it. Lorapay checks your PIN, the recipient and your limits before any money moves, so a wrong number fails safely.' },
+];
+
+const features = [
+  { icon: 'bank', title: 'Bank transfers', body: "Send to any Nigerian bank. See the account holder's name before you pay, and save recipients for next time." },
+  { icon: 'phone', title: 'Pay by phone number', body: 'Paying someone on Lorapay? Their phone number is all you need. The money lands instantly.' },
+  { icon: 'signal', title: 'Airtime & data', body: 'Top up any network for yourself or someone else in a few taps, even when your own data has run out.' },
+  { icon: 'list', title: 'History you can trust', body: 'Every payment with a clear status: sent, on its way, or delivered. Offline payments show exactly where they are.' },
+];
+const icons: Record<string, string> = {
+  bank: 'M3 10l9-6 9 6M5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 20h18',
+  phone: 'M8 2h8a3 3 0 013 3v14a3 3 0 01-3 3H8a3 3 0 01-3-3V5a3 3 0 013-3zM11 18h2',
+  signal: 'M5 12.5a10 10 0 0114 0M8.5 16a5 5 0 017 0M12 19.5h.01M2 9a15 15 0 0120 0',
+  list: 'M4 6h16M4 12h16M4 18h10',
+};
+
+const security = [
+  { title: 'Your PIN, every time', body: 'Lorapay checks it before any payment moves, online or offline, and too many wrong tries lock it.' },
+  { title: 'Sealed end to end', body: "Phones that carry your payment can't see who you're paying or how much, and can't change it." },
+  { title: 'Pause after a PIN reset', body: 'A new PIN holds payments for 24 hours, and we tell you by SMS and email.' },
+  { title: 'Your phones, your control', body: 'See every phone signed in to your account. Signing out of a phone removes it.' },
+];
+
+const faqs = [
+  { q: 'Does it really work with no data at all?', a: 'Yes, as long as another Lorapay phone is within Bluetooth range and some phone along the way can get online. Your payment waits safely on your phone until it can be delivered, and you can see its status at any time.' },
+  { q: 'Can people nearby see my payments?', a: "No. Your payment is encrypted on your phone. Phones that pass it along only see a sealed packet; they can't read the amount, the recipient or your PIN, and they can't change it." },
+  { q: 'Who holds my money?', a: '[Licensed partner disclosure: the CBN-licensed bank or payment service provider that holds customer funds, and deposit insurance details.]' },
+  { q: 'When does Lorapay launch?', a: "We're opening in stages from [LAUNCH MONTH]. Waitlist members get in first, starting with the states where most people have signed up." },
+];
+---
+
+<Base
+  title="Lorapay"
+  description="Send money to any bank account or phone number in Nigeria, even when your network drops. Join the Lorapay waitlist."
+  headerOnNavy
+>
+  <section class="hero on-navy">
+    <div class="pattern" style="opacity:0.07" aria-hidden="true"></div>
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p class="pill"><span class="pill-dot" aria-hidden="true"></span>Coming soon · Built for Nigeria</p>
+        <h1>Pay anyone.<br />Online <span class="amber">or offline.</span></h1>
+        <p class="lead hero-lead">
+          Send money to any bank account or phone number in Nigeria. When your network drops, Lorapay passes your payment, sealed and
+          encrypted, through nearby Lorapay phones until it gets through.
+        </p>
+        <div class="hero-ctas">
+          <a href="#waitlist" class="btn btn-amber">
+            Get early access
+            <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+          </a>
+          <a href="#how" class="btn btn-ghost">See how offline works</a>
+        </div>
+        <p class="hero-tags"><span>Bank transfers</span><span aria-hidden="true">/</span><span>Airtime &amp; data</span><span aria-hidden="true">/</span><span>Pay by phone number</span></p>
+      </div>
+      <div class="hero-phone">
+        <PhoneMockup />
+      </div>
+    </div>
+  </section>
+
+  <section id="how" class="wrap section">
+    <div class="split-head">
+      <div>
+        <p class="eyebrow">When the network drops</p>
+        <h2>Your payment finds a way through.</h2>
+      </div>
+      <p class="lead narrow">No data, weak signal or a network outage: you can still pay. Nearby Lorapay phones carry your payment until one of them is online.</p>
+    </div>
+
+    <ol class="route" aria-label="How an offline payment travels">
+      <li class="node you">You · no signal</li>
+      <li class="link" aria-hidden="true"></li>
+      <li class="node">Nearby Lorapay phone</li>
+      <li class="link" aria-hidden="true"></li>
+      <li class="node">Phone with data</li>
+      <li class="link solid" aria-hidden="true"></li>
+      <li class="node done">Lorapay · paid</li>
+    </ol>
+
+    <div class="grid steps">
+      {steps.map(s => (
+        <div class="card step">
+          <span class="num">{s.n}</span>
+          <h3>{s.title}</h3>
+          <p>{s.body}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section id="features" class="features">
+    <div class="wrap section">
+      <p class="eyebrow muted">Everything you pay for, in one app</p>
+      <h2 class="features-title">Simple money, the way it should work.</h2>
+      <div class="grid features-grid">
+        {features.map(f => (
+          <div class="feature">
+            <span class="icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d={icons[f.icon]}></path></svg>
+            </span>
+            <h3>{f.title}</h3>
+            <p>{f.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="security" class="sec on-navy">
+    <div class="pattern" style="opacity:0.05" aria-hidden="true"></div>
+    <div class="wrap section sec-grid">
+      <div class="sec-copy">
+        <p class="eyebrow">Security</p>
+        <h2>Built to guard your money, online and off.</h2>
+        <p class="lead">Offline payments are sealed on your phone and opened only by Lorapay. Every rule that protects an online payment applies to them too.</p>
+        <a href="/security" class="sec-link">How we protect you →</a>
+      </div>
+      <div class="sec-cards">
+        {security.map(s => (
+          <div class="sec-card">
+            <h3>{s.title}</h3>
+            <p>{s.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="waitlist" class="wrap section wl-section">
+    <div class="wl-pitch">
+      <p class="eyebrow">Early access</p>
+      <h2 class="big">Be first in line.</h2>
+      <p class="lead">Join the waitlist and we'll text you as soon as Lorapay opens in your state. No spam, ever.</p>
+      <ul class="ticks">
+        <li><strong>Early access</strong> before the public launch</li>
+        <li><strong>One SMS</strong> when it's your turn, not a stream of promos</li>
+        <li><strong>Shape the app:</strong> tell us what you'd use it for</li>
+      </ul>
+    </div>
+    <div class="wl-box">
+      <WaitlistForm />
+    </div>
+  </section>
+
+  <section id="faq" class="wrap faq">
+    <h2>Questions</h2>
+    <div class="faq-list">
+      {faqs.map(f => (
+        <details>
+          <summary>{f.q}<span class="plus" aria-hidden="true">+</span></summary>
+          <p>{f.a}</p>
+        </details>
+      ))}
+    </div>
+    <p class="faq-more">Something else? Email <a href={`mailto:${company.email}`}>{company.email}</a>.</p>
+  </section>
+</Base>
+
+<style>
+  .hero {
+    position: relative;
+    background: var(--navy);
+    color: var(--white);
+    overflow: hidden;
+    padding-top: 80px;
+  }
+  .hero-grid {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 56px;
+    padding-top: 64px;
+  }
+  .hero-copy {
+    flex: 1 1 460px;
+    min-width: 0;
+    padding-bottom: 72px;
+  }
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+    padding: 8px 14px;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 999px;
+    font-family: var(--mono);
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.88);
+  }
+  .pill-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: var(--amber);
+  }
+  h1 {
+    margin-top: 24px;
+    font-size: clamp(44px, 6.4vw, 84px);
+    line-height: 0.98;
+    letter-spacing: -0.035em;
+  }
+  .amber {
+    color: var(--amber);
+  }
+  .hero-lead {
+    margin-top: 28px;
+    max-width: 540px;
+    font-size: 19px;
+  }
+  .hero-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 36px;
+  }
+  .hero-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 20px;
+    margin: 40px 0 0;
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--on-navy-soft);
+  }
+  .hero-phone {
+    flex: 0 1 380px;
+    min-width: 0;
+    margin: 0 auto;
+  }
+
+  .section {
+    padding-top: 104px;
+    padding-bottom: 96px;
+  }
+  .split-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .split-head h2 {
+    margin-top: 14px;
+    max-width: 640px;
+  }
+  .narrow {
+    max-width: 400px;
+  }
+  .route {
+    list-style: none;
+    margin: 56px 0 0;
+    padding: 28px;
+    border-radius: var(--radius);
+    background: var(--white);
+    border: 1px solid var(--line);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+  }
+  .node {
+    padding: 12px 16px;
+    border-radius: 14px;
+    background: var(--paper);
+    font-weight: 600;
+    font-size: 15px;
+  }
+  .node.you {
+    background: var(--amber-soft);
+    color: var(--amber-ink);
+    font-weight: 700;
+  }
+  .node.done {
+    background: var(--navy);
+    color: var(--white);
+    font-weight: 700;
+  }
+  .link {
+    flex: 1 1 40px;
+    min-width: 24px;
+    border-top: 2px dashed var(--amber);
+  }
+  .link.solid {
+    border-top: 2px solid var(--navy);
+  }
+  .steps {
+    margin-top: 24px;
+  }
+  .step {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .step p,
+  .feature p {
+    margin: 0;
+    color: var(--ink-soft);
+    font-size: 16px;
+  }
+  .num {
+    font-family: var(--mono);
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--amber-ink);
+  }
+
+  .features {
+    background: var(--white);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .muted {
+    color: var(--ink-soft);
+  }
+  .features-title {
+    margin-top: 14px;
+    max-width: 720px;
+  }
+  .features-grid {
+    margin-top: 56px;
+  }
+  .feature {
+    padding: 28px;
+    border-radius: 22px;
+    background: var(--paper);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .feature p {
+    font-size: 15px;
+  }
+  .icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    background: var(--navy);
+    color: var(--white);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .sec {
+    position: relative;
+    background: var(--navy);
+    color: var(--white);
+    overflow: hidden;
+  }
+  .sec-grid {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 56px;
+  }
+  .sec-copy {
+    flex: 1 1 360px;
+    min-width: 0;
+  }
+  .sec-copy h2 {
+    margin: 14px 0 22px;
+  }
+  .sec-copy .lead {
+    max-width: 460px;
+    font-size: 17px;
+  }
+  .sec-link {
+    display: inline-block;
+    margin-top: 24px;
+    color: var(--amber);
+    font-weight: 700;
+    text-decoration: none;
+  }
+  .sec-link:hover {
+    color: var(--amber);
+    text-decoration: underline;
+  }
+  .sec-cards {
+    flex: 1 1 480px;
+    min-width: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+  }
+  .sec-card {
+    padding: 24px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+  }
+  .sec-card h3 {
+    font-size: 18px;
+  }
+  .sec-card p {
+    margin: 10px 0 0;
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--on-navy);
+  }
+
+  .wl-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 56px;
+    align-items: flex-start;
+    padding-top: 112px;
+  }
+  .wl-pitch {
+    flex: 1 1 380px;
+    min-width: 0;
+  }
+  .big {
+    margin: 14px 0 22px;
+    font-size: clamp(38px, 5vw, 64px);
+  }
+  .wl-pitch .lead {
+    max-width: 440px;
+  }
+  .ticks {
+    list-style: none;
+    margin: 36px 0 0;
+    padding: 0;
+    display: grid;
+    gap: 18px;
+  }
+  .ticks li {
+    position: relative;
+    padding-left: 42px;
+    line-height: 1.5;
+  }
+  .ticks li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: -1px;
+    width: 28px;
+    height: 28px;
+    border-radius: 999px;
+    background: var(--navy)
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l5 5L20 7'/%3E%3C/svg%3E")
+      center / 14px no-repeat;
+  }
+  .wl-box {
+    flex: 1 1 460px;
+    min-width: 0;
+  }
+
+  .faq {
+    max-width: 880px;
+    padding-bottom: 112px;
+  }
+  .faq h2 {
+    font-size: clamp(30px, 3.6vw, 44px);
+    margin-bottom: 28px;
+  }
+  .faq-list {
+    border-top: 1px solid var(--line);
+  }
+  details {
+    border-bottom: 1px solid var(--line);
+    padding: 22px 0;
+  }
+  summary {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    list-style: none;
+  }
+  summary::-webkit-details-marker {
+    display: none;
+  }
+  .plus {
+    font-size: 24px;
+    line-height: 1;
+    transition: transform 0.2s;
+  }
+  details[open] .plus {
+    transform: rotate(45deg);
+  }
+  details p {
+    margin: 12px 0 0;
+    color: var(--ink-soft);
+  }
+  .faq-more {
+    margin-top: 28px;
+    color: var(--ink-soft);
+  }
+</style>

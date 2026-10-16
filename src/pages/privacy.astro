@@ -1,0 +1,101 @@
+---
+import Prose from '../layouts/Prose.astro';
+import { company } from '../content/company';
+---
+
+<Prose
+  title="Privacy policy"
+  eyebrow="Your data"
+  description="How Lorapay collects, uses and protects personal data on this website and its waitlist, under the Nigeria Data Protection Act 2023."
+  updated={company.policyDate}
+  draft
+>
+  <p class="lead">
+    This policy explains what personal data {company.legalName} ("Lorapay", "we") collects through this website and its waitlist,
+    why, and the rights you have under the Nigeria Data Protection Act 2023 (NDPA). The Lorapay app will have its own privacy
+    policy when it launches.
+  </p>
+
+  <h2>Who is responsible</h2>
+  <p>
+    {company.legalName} (RC {company.rcNumber}), {company.address}, is the data controller. For anything about your data, contact
+    our Data Protection Officer at <a href={`mailto:${company.privacyEmail}`}>{company.privacyEmail}</a>.
+  </p>
+
+  <h2>What we collect</h2>
+  <table>
+    <thead><tr><th>When</th><th>What</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>You join the waitlist</td>
+        <td>Name, mobile number, email (if you give it), state, what you'd use Lorapay for, and how you found us (for example a link you followed)</td>
+        <td>To tell you when Lorapay opens in your state, and to understand where people want it</td>
+      </tr>
+      <tr>
+        <td>You send a message</td>
+        <td>Name, email, topic and your message</td>
+        <td>To reply to you</td>
+      </tr>
+      <tr>
+        <td>You visit the site</td>
+        <td>Standard server logs kept by our hosting provider (IP address, browser, pages requested, time)</td>
+        <td>To keep the site running and secure</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>This website does not use advertising or analytics cookies, and doesn't track you across other sites.</p>
+  <p>Please don't send us your PIN, BVN, card or bank details. We never ask for them through this website.</p>
+
+  <h2>Our lawful basis</h2>
+  <ul>
+    <li><strong>Consent</strong> for the waitlist: you tick the box when you join. You can withdraw it at any time.</li>
+    <li><strong>Legitimate interests</strong> for replying to messages you send us and keeping the site secure.</li>
+  </ul>
+
+  <h2>How long we keep it</h2>
+  <ul>
+    <li>Waitlist details: until we've told you Lorapay is open in your state and [12] months after that, or until you ask us to remove you, whichever comes first.</li>
+    <li>Messages: up to [24] months after our last reply.</li>
+    <li>Server logs: as kept by our hosting provider, normally no more than [30] days.</li>
+  </ul>
+
+  <h2>Who we share it with</h2>
+  <p>We don't sell your data or share it for marketing. We use service providers who process it for us under contract:</p>
+  <ul>
+    <li><strong>Google</strong> (Google Workspace / Google Sheets) to store waitlist entries and messages.</li>
+    <li><strong>Vercel</strong> to host this website.</li>
+    <li><strong>[SMS provider]</strong> to send the launch message, when we send it.</li>
+  </ul>
+  <p>
+    Some of these providers store data outside Nigeria. Where they do, we rely on the safeguards the NDPA allows for transfers
+    abroad, such as contractual protections. [Confirm the transfer basis with your lawyer.] We may also disclose data where the law
+    requires it.
+  </p>
+
+  <h2>Your rights</h2>
+  <p>Under the NDPA you can ask us to:</p>
+  <ul>
+    <li>tell you what data we hold about you and give you a copy;</li>
+    <li>correct it if it's wrong;</li>
+    <li>delete it, or remove you from the waitlist;</li>
+    <li>restrict or object to how we use it;</li>
+    <li>send it to you or another organisation in a common format;</li>
+    <li>withdraw your consent, at any time, without affecting what we did before.</li>
+  </ul>
+  <p>
+    Email <a href={`mailto:${company.privacyEmail}`}>{company.privacyEmail}</a> from the address or phone number you used. We'll
+    answer within 30 days. If you're not happy with our answer, you can complain to the Nigeria Data Protection Commission (NDPC).
+  </p>
+
+  <h2>Security</h2>
+  <p>
+    Waitlist entries are sent over an encrypted connection (HTTPS) and stored in an account protected by two-step verification,
+    which only the Lorapay staff who need it can open.
+  </p>
+
+  <h2>Children</h2>
+  <p>Lorapay is for people aged 18 and over. Please don't join the waitlist if you're younger.</p>
+
+  <h2>Changes</h2>
+  <p>If we change this policy we'll update the date at the top, and tell waitlist members about important changes.</p>
+</Prose>

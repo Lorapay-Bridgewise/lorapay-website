@@ -1,0 +1,52 @@
+---
+import Base from './Base.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  eyebrow: string;
+  updated?: string;
+  draft?: boolean;
+}
+const { title, description, eyebrow, updated, draft = false } = Astro.props;
+---
+
+<Base title={title} description={description}>
+  <article class="wrap doc">
+    <header class="doc-head">
+      <p class="eyebrow">{eyebrow}</p>
+      <h1>{title}</h1>
+      {updated && <p class="updated">Last updated: {updated}</p>}
+      {draft && (
+        <p class="note">
+          Draft for review. Text in [square brackets] must be completed, and a Nigerian lawyer should review this page before launch.
+        </p>
+      )}
+    </header>
+    <div class="prose">
+      <slot />
+    </div>
+  </article>
+</Base>
+
+<style>
+  .doc {
+    padding-top: 80px;
+    padding-bottom: 112px;
+  }
+  .doc-head {
+    max-width: 760px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+  h1 {
+    font-size: clamp(36px, 5vw, 60px);
+  }
+  .updated {
+    margin: 0;
+    color: var(--ink-soft);
+    font-size: 15px;
+  }
+</style>

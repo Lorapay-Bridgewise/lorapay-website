@@ -1,0 +1,41 @@
+---
+import Base from '../layouts/Base.astro';
+import WaitlistForm from '../components/WaitlistForm.astro';
+---
+
+<Base title="Join the waitlist" description="Pay anyone, online or offline. Join the Lorapay waitlist and be first in line when we open in your state." headerOnNavy>
+  <section class="on-navy page">
+    <div class="pattern" style="opacity:0.07" aria-hidden="true"></div>
+    <div class="box">
+      <WaitlistForm variant="page" />
+      <p class="small">We only use your details to tell you about Lorapay's launch. <a href="/privacy">Privacy policy</a></p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .page {
+    position: relative;
+    background: var(--navy);
+    min-height: 100vh;
+    overflow: hidden;
+    padding: 112px var(--gutter) 64px;
+  }
+  .box {
+    position: relative;
+    max-width: 520px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .small {
+    margin: 0;
+    text-align: center;
+    font-size: 13px;
+    color: var(--on-navy-soft);
+  }
+  .small a {
+    color: var(--white);
+  }
+</style>

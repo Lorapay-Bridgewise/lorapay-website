@@ -1,0 +1,110 @@
+---
+import { company } from '../content/company';
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer on-navy">
+  <div class="wrap top">
+    <div class="brand">
+      <img src="/images/wordmark-white.png" alt="Lorapay" width="99" height="30" />
+      <p>Pay anyone, online or offline.</p>
+      <p class="legal">{company.legalLine}</p>
+    </div>
+    <nav aria-label="Footer" class="cols">
+      <div>
+        <h2>Lorapay</h2>
+        <ul>
+          <li><a href="/#how">How offline works</a></li>
+          <li><a href="/waitlist">Join the waitlist</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/about#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Trust</h2>
+        <ul>
+          <li><a href="/security">Security</a></li>
+          <li><a href="/security#report">Report a vulnerability</a></li>
+          <li><a href="/privacy">Privacy policy</a></li>
+          <li><a href="/terms">Terms of use</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+  <div class="wrap bottom">
+    <span>© {year} {company.legalName}</span>
+    <a href={`mailto:${company.email}`}>{company.email}</a>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--navy);
+    color: var(--on-navy-soft);
+    font-size: 15px;
+  }
+  .top {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 40px;
+    padding-top: 64px;
+    padding-bottom: 40px;
+  }
+  .brand {
+    flex: 1 1 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .brand img {
+    height: 30px;
+    width: auto;
+    align-self: flex-start;
+  }
+  .brand p {
+    margin: 0;
+    max-width: 420px;
+  }
+  .legal {
+    font-size: 13px;
+  }
+  .cols {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 48px;
+  }
+  .cols h2 {
+    font-size: 13px;
+    font-family: var(--mono);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin: 0 0 12px;
+  }
+  .cols ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 10px;
+  }
+  a {
+    color: var(--white);
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+    color: var(--white);
+  }
+  .bottom {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 12px;
+    padding-top: 20px;
+    padding-bottom: 32px;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    font-size: 13px;
+  }
+</style>

@@ -1,0 +1,153 @@
+---
+interface Props {
+  onNavy?: boolean;
+}
+const { onNavy = false } = Astro.props;
+const links = [
+  { href: '/#how', label: 'How offline works' },
+  { href: '/security', label: 'Security' },
+  { href: '/about', label: 'About' },
+];
+const path = Astro.url.pathname;
+---
+
+<header class:list={['site-header', { 'on-navy': onNavy }]}>
+  <div class="wrap bar">
+    <a href="/" class="logo" aria-label="Lorapay home">
+      <img src={onNavy ? '/images/wordmark-white.png' : '/images/wordmark-navy.png'} alt="Lorapay" width="106" height="32" />
+    </a>
+    <nav aria-label="Main" class="nav" id="site-nav" data-open="false">
+      <ul>
+        {links.map(l => <li><a href={l.href} aria-current={path === l.href ? 'page' : undefined}>{l.label}</a></li>)}
+      </ul>
+    </nav>
+    <div class="actions">
+      <a href="/waitlist" class="btn btn-amber cta">Join the waitlist</a>
+      <button type="button" class="menu" aria-controls="site-nav" aria-expanded="false" aria-label="Menu">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<script>
+  const button = document.querySelector<HTMLButtonElement>('.site-header .menu');
+  const nav = document.getElementById('site-nav');
+  button?.addEventListener('click', () => {
+    const open = button.getAttribute('aria-expanded') !== 'true';
+    button.setAttribute('aria-expanded', String(open));
+    nav?.setAttribute('data-open', String(open));
+  });
+</script>
+
+<style>
+  .site-header {
+    position: relative;
+    z-index: 10;
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
+  }
+  .site-header.on-navy {
+    position: absolute;
+    inset: 0 0 auto 0;
+    background: transparent;
+    border-bottom: 0;
+  }
+  .bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    min-height: 80px;
+  }
+  .logo img {
+    height: 32px;
+    width: auto;
+  }
+  .nav ul {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .nav a {
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 15px;
+    color: var(--navy);
+  }
+  .nav a[aria-current='page'] {
+    text-decoration: underline;
+  }
+  .on-navy .nav a {
+    color: var(--on-navy);
+  }
+  .on-navy .nav a:hover {
+    color: var(--white);
+  }
+  .actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .cta {
+    min-height: 44px;
+    padding: 0 18px;
+    font-size: 15px;
+    border-radius: 999px;
+  }
+  .menu {
+    display: none;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    border: 1.5px solid var(--line);
+    background: transparent;
+    color: var(--navy);
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+  }
+  .on-navy .menu {
+    border-color: rgba(255, 255, 255, 0.35);
+    color: var(--white);
+  }
+  @media (max-width: 820px) {
+    .menu {
+      display: inline-flex;
+    }
+    .nav {
+      display: none;
+      position: absolute;
+      top: 76px;
+      left: var(--gutter);
+      right: var(--gutter);
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 8px;
+      box-shadow: 0 18px 40px rgba(0, 31, 66, 0.18);
+    }
+    .nav[data-open='true'] {
+      display: block;
+    }
+    .nav ul {
+      flex-direction: column;
+      gap: 0;
+    }
+    .nav a,
+    .on-navy .nav a {
+      display: block;
+      padding: 14px 16px;
+      color: var(--navy);
+      font-size: 16px;
+    }
+  }
+  @media (max-width: 380px) {
+    .cta {
+      padding: 0 12px;
+      font-size: 14px;
+    }
+  }
+</style>

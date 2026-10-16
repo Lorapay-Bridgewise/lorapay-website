@@ -1,0 +1,178 @@
+---
+import Base from '../layouts/Base.astro';
+import ContactForm from '../components/ContactForm.astro';
+import { company } from '../content/company';
+
+// Fill in your team. Photos are optional; initials are shown otherwise.
+const team = [
+  { name: '[Founder name]', role: 'Co-founder & CEO', bio: '[One or two lines: background, why Lorapay.]' },
+  { name: '[Founder name]', role: 'Co-founder & CTO', bio: '[One or two lines: background, what they build.]' },
+];
+const initials = (n: string) => n.replace(/[[\]]/g, '').split(/\s+/).map(w => w[0] ?? '').join('').slice(0, 2).toUpperCase();
+---
+
+<Base title="About" description="Why we're building Lorapay: payments that keep working in Nigeria when the network doesn't. Meet the team and get in touch.">
+  <section class="wrap intro">
+    <p class="eyebrow">About Lorapay</p>
+    <h1>Money that keeps moving when the network doesn't.</h1>
+    <p class="lead">
+      In Nigeria, a payment can fail for reasons that have nothing to do with money: no signal at the market, data that ran out,
+      a network that's down for the afternoon. Lorapay is a payments app built for those moments. It sends money to any bank account
+      or phone number online, and when you're offline it carries your payment, sealed, through nearby Lorapay phones until one of them
+      can deliver it.
+    </p>
+  </section>
+
+  <section class="wrap values">
+    <div class="grid">
+      <div class="card">
+        <h2 class="h3">Works where you are</h2>
+        <p>Designed for weak signal and low-cost Android phones, not just city Wi-Fi.</p>
+      </div>
+      <div class="card">
+        <h2 class="h3">Safe by design</h2>
+        <p>Your PIN is checked for every payment, offline ones included, and nobody in between can read or change them. <a href="/security">How it works</a></p>
+      </div>
+      <div class="card">
+        <h2 class="h3">Straightforward</h2>
+        <p>Clear names before you pay, clear status after. No surprises.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap team">
+    <h2>The team</h2>
+    <div class="grid">
+      {team.map(p => (
+        <div class="person">
+          <span class="avatar" aria-hidden="true">{initials(p.name)}</span>
+          <div>
+            <h3>{p.name}</h3>
+            <p class="role">{p.role}</p>
+            <p>{p.bio}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section id="contact" class="wrap contact">
+    <div class="contact-copy">
+      <h2>Get in touch</h2>
+      <p class="lead">Questions, partnerships or press: send a message and a person will reply.</p>
+      <ul class="ways">
+        <li><span>Email</span><a href={`mailto:${company.email}`}>{company.email}</a></li>
+        <li><span>Security reports</span><a href={`mailto:${company.securityEmail}`}>{company.securityEmail}</a></li>
+        <li><span>Office</span>{company.address}</li>
+      </ul>
+    </div>
+    <div class="card form-card">
+      <ContactForm />
+    </div>
+  </section>
+</Base>
+
+<style>
+  .intro {
+    padding-top: 88px;
+    padding-bottom: 48px;
+  }
+  .intro h1,
+  .intro .lead {
+    max-width: 900px;
+  }
+  h1 {
+    margin: 14px 0 24px;
+    font-size: clamp(38px, 5.4vw, 68px);
+  }
+  .values {
+    padding-bottom: 72px;
+  }
+  .h3 {
+    font-size: 21px;
+    letter-spacing: -0.01em;
+    line-height: 1.25;
+  }
+  .card p {
+    color: var(--ink-soft);
+    margin: 10px 0 0;
+  }
+  .team {
+    padding-bottom: 72px;
+  }
+  .team h2,
+  .contact h2 {
+    font-size: clamp(30px, 3.6vw, 44px);
+    margin-bottom: 28px;
+  }
+  .person {
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+    padding: 24px;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+  }
+  .person p {
+    margin: 4px 0 0;
+    color: var(--ink-soft);
+    font-size: 15px;
+  }
+  .person .role {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--amber-ink);
+  }
+  .avatar {
+    flex: 0 0 auto;
+    width: 56px;
+    height: 56px;
+    border-radius: 999px;
+    background: var(--navy);
+    color: var(--white);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+  }
+  .contact {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 48px;
+    padding-bottom: 112px;
+    scroll-margin-top: 24px;
+  }
+  .contact-copy {
+    flex: 1 1 320px;
+    min-width: 0;
+  }
+  .ways {
+    list-style: none;
+    margin: 28px 0 0;
+    padding: 0;
+    display: grid;
+    gap: 16px;
+  }
+  .ways li {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .ways span {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .form-card {
+    flex: 1 1 480px;
+    min-width: 0;
+  }
+  @media (max-width: 480px) {
+    .form-card {
+      padding: 22px 18px;
+    }
+  }
+</style>

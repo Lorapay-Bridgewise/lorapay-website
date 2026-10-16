@@ -1,0 +1,36 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Page not found" description="This page doesn't exist." noindex>
+  <section class="wrap nf">
+    <p class="eyebrow">404</p>
+    <h1>This page didn't make it through.</h1>
+    <p class="lead">The link may be old or mistyped.</p>
+    <div class="links">
+      <a href="/" class="btn btn-navy">Go to the home page</a>
+      <a href="/waitlist" class="btn btn-quiet">Join the waitlist</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .nf {
+    padding-top: 120px;
+    padding-bottom: 160px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    align-items: flex-start;
+  }
+  h1 {
+    font-size: clamp(36px, 5vw, 60px);
+    max-width: 720px;
+  }
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 12px;
+  }
+</style>

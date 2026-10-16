@@ -1,0 +1,30 @@
+{
+  "name": "lorapay-website",
+  "private": true,
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Lorapay's public website: landing page, waitlist, privacy, terms, about, security.",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "test": "node --test tests/apps-script.test.mjs && playwright test",
+    "test:install": "playwright install chromium",
+    "build:test": "astro build --mode test"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "3.7.4",
+    "@fontsource/ibm-plex-mono": "5.3.0",
+    "@fontsource/schibsted-grotesk": "5.3.0",
+    "astro": "7.3.8"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.4",
+    "@playwright/test": "^1.55.0",
+    "typescript": "^5.6.0"
+  }
+}

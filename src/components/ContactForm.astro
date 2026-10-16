@@ -1,0 +1,132 @@
+---
+const endpoint = import.meta.env.PUBLIC_FORMS_ENDPOINT ?? '';
+const topics = ['A question about Lorapay', 'Partnership or investment', 'Press', 'Something else'];
+---
+
+<div class="contact" data-forms-endpoint={endpoint}>
+  <form class="contact-form" novalidate>
+    <div class="row">
+      <div class="field">
+        <label for="c-name">Your name</label>
+        <input id="c-name" name="name" class="input" type="text" autocomplete="name" maxlength="80" aria-describedby="c-name-err" />
+        <p class="error" id="c-name-err" role="alert"></p>
+      </div>
+      <div class="field">
+        <label for="c-email">Email</label>
+        <input id="c-email" name="email" class="input" type="email" autocomplete="email" maxlength="120" aria-describedby="c-email-err" />
+        <p class="error" id="c-email-err" role="alert"></p>
+      </div>
+    </div>
+    <div class="field">
+      <label for="c-topic">Topic</label>
+      <select id="c-topic" name="topic" class="select">
+        {topics.map(t => <option value={t}>{t}</option>)}
+      </select>
+    </div>
+    <div class="field">
+      <label for="c-message">Message</label>
+      <textarea id="c-message" name="message" class="textarea" maxlength="2000" aria-describedby="c-message-err"></textarea>
+      <p class="error" id="c-message-err" role="alert"></p>
+    </div>
+    <div class="hp" aria-hidden="true">
+      <label for="c-website">Leave this empty</label>
+      <input id="c-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+    </div>
+    <p class="note warn">Never send your PIN, BVN, card or account details here. Lorapay will never ask for them.</p>
+    <p class="form-error" role="alert" hidden></p>
+    <button type="submit" class="btn btn-navy"><span class="label">Send message</span></button>
+  </form>
+  <div class="sent" role="status" hidden tabindex="-1">
+    <h3>Thanks, we've got your message.</h3>
+    <p>We usually reply within two working days.</p>
+  </div>
+</div>
+
+<script>
+  import { attribution, isEmail, sendForm, setError } from '../scripts/forms';
+
+  document.querySelectorAll<HTMLElement>('.contact').forEach(root => {
+    const form = root.querySelector<HTMLFormElement>('form')!;
+    const sent = root.querySelector<HTMLElement>('.sent')!;
+    const formError = form.querySelector<HTMLElement>('.form-error')!;
+    const button = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+    const label = button.querySelector<HTMLElement>('.label')!;
+
+    form.addEventListener('submit', async event => {
+      event.preventDefault();
+      formError.hidden = true;
+      const data = new FormData(form);
+      const v = {
+        name: String(data.get('name') ?? '').trim(),
+        email: String(data.get('email') ?? '').trim(),
+        topic: String(data.get('topic') ?? ''),
+        message: String(data.get('message') ?? '').trim(),
+        website: String(data.get('website') ?? ''),
+      };
+      const errors = {
+        name: v.name.length >= 2 ? '' : 'Please enter your name.',
+        email: isEmail(v.email) ? '' : 'Enter an email we can reply to.',
+        message: v.message.length >= 10 ? '' : 'Tell us a little more (at least 10 characters).',
+      };
+      for (const [f, m] of Object.entries(errors)) setError(form, f, m);
+      if (Object.values(errors).some(Boolean)) {
+        form.querySelector<HTMLElement>('[aria-invalid="true"]')?.focus();
+        return;
+      }
+      button.disabled = true;
+      label.textContent = 'Sending…';
+      const result = await sendForm(root.dataset.formsEndpoint ?? '', { kind: 'contact', ...v, ...attribution() });
+      button.disabled = false;
+      label.textContent = 'Send message';
+      if (!result.ok) {
+        formError.textContent = result.error;
+        formError.hidden = false;
+        return;
+      }
+      form.hidden = true;
+      sent.hidden = false;
+      sent.focus();
+    });
+  });
+</script>
+
+<style>
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .row > .field {
+    flex: 1 1 220px;
+  }
+  .warn {
+    margin: 0;
+  }
+  .form-error {
+    margin: 0;
+    padding: 12px 16px;
+    border-radius: 12px;
+    background: #fde8e6;
+    color: var(--danger);
+  }
+  button {
+    align-self: flex-start;
+  }
+  .sent[hidden] {
+    display: none;
+  }
+  .sent {
+    outline: none;
+  }
+  .sent h3 {
+    font-size: 24px;
+  }
+  .sent p {
+    color: var(--ink-soft);
+  }
+</style>
