@@ -9,6 +9,7 @@ import '@fontsource/ibm-plex-mono/600.css';
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { company } from '../content/company';
 
 interface Props {
   title: string;
@@ -16,12 +17,63 @@ interface Props {
   /** Header over a navy hero (white logo and links) or on paper. */
   headerOnNavy?: boolean;
   noindex?: boolean;
+  /** Extra structured data (schema.org JSON-LD objects) for this page, e.g. its FAQ. */
+  schema?: object[];
 }
 
-const { title, description, headerOnNavy = false, noindex = false } = Astro.props;
+const { title, description, headerOnNavy = false, noindex = false, schema = [] } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
+const home = new URL('/', Astro.site).href;
 const ogImage = new URL('/images/og.png', Astro.site);
-const fullTitle = title === 'Lorapay' ? 'Lorapay — Pay anyone, online or offline' : `${title} · Lorapay`;
+const logo = new URL('/icon-192.png', Astro.site).href;
+const fullTitle = title === 'Lorapay' ? 'Lorapay: Pay anyone, online or offline' : `${title} · Lorapay`;
+const keywords =
+  'Lorapay, offline payments Nigeria, send money without internet, bank transfer app Nigeria, pay by phone number, airtime and data, mobile wallet Nigeria, Bridgewise';
+
+// Who publishes the site and what the app is, for search engines (schema.org).
+const structured = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    '@id': `${home}#organization`,
+    name: 'Lorapay',
+    legalName: company.legalName,
+    url: home,
+    logo,
+    email: company.email,
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'No 7 Prince Ebenezer Street, Jakande, Bucknor',
+      addressLocality: 'Isolo, Lagos',
+      postalCode: '100263',
+      addressCountry: 'NG',
+    },
+    contactPoint: [
+      { '@type': 'ContactPoint', contactType: 'customer support', email: company.email, areaServed: 'NG', availableLanguage: 'en' },
+      { '@type': 'ContactPoint', contactType: 'privacy', email: company.privacyEmail, areaServed: 'NG' },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': `${home}#website`,
+    name: 'Lorapay',
+    url: home,
+    inLanguage: 'en-NG',
+    publisher: { '@id': `${home}#organization` },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'MobileApplication',
+    name: 'Lorapay',
+    operatingSystem: 'Android',
+    applicationCategory: 'FinanceApplication',
+    description: 'Send money to any bank account or phone number in Nigeria, even when your network drops.',
+    publisher: { '@id': `${home}#organization` },
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'NGN' },
+  },
+  ...schema,
+];
 ---
 
 <!doctype html>
@@ -31,8 +83,17 @@ const fullTitle = title === 'Lorapay' ? 'Lorapay — Pay anyone, online or offli
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <meta name="author" content={company.legalName} />
     <link rel="canonical" href={canonical} />
-    {noindex && <meta name="robots" content="noindex" />}
+    <link rel="alternate" hreflang="en-NG" href={canonical} />
+    <link rel="alternate" hreflang="x-default" href={canonical} />
+    <meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large, max-snippet:-1'} />
+    <meta name="geo.region" content="NG-LA" />
+    <meta name="geo.placename" content="Lagos" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="application-name" content="Lorapay" />
+    <meta name="apple-mobile-web-app-title" content="Lorapay" />
     <meta name="theme-color" content="#002B5B" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
@@ -47,7 +108,15 @@ const fullTitle = title === 'Lorapay' ? 'Lorapay — Pay anyone, online or offli
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:alt" content="Lorapay: pay anyone, online or offline" />
+    <meta property="og:locale" content="en_NG" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content="Lorapay: pay anyone, online or offline" />
+    {!noindex && <script type="application/ld+json" is:inline set:html={JSON.stringify(structured)} />}
   </head>
   <body>
     <a class="skip" href="#main">Skip to content</a>

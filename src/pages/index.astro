@@ -36,6 +36,13 @@ const faqs = [
   title="Lorapay"
   description="Send money to any bank account or phone number in Nigeria, even when your network drops. Join the Lorapay waitlist."
   headerOnNavy
+  schema={[
+    {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: faqs.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+    },
+  ]}
 >
   <section class="hero on-navy">
     <div class="pattern" style="opacity:0.07" aria-hidden="true"></div>
