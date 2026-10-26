@@ -10,19 +10,17 @@ Sheet** through a small Google Apps Script ([apps-script/README.md](apps-script/
 | `/waitlist` waitlist on its own (for WhatsApp and social links) | `src/pages/waitlist.astro` |
 | `/about` mission, team, contact form | `src/pages/about.astro` |
 | `/security` how payments are protected; how to report a vulnerability | `src/pages/security.astro` |
-| `/privacy`, `/terms` drafts for your lawyer | `src/pages/privacy.astro`, `src/pages/terms.astro` |
+| `/privacy` website and waitlist privacy policy | `src/pages/privacy.astro` |
+| `/app-privacy` app privacy policy (the URL for the Play Store listing) | `src/pages/app-privacy.astro` |
+| `/terms` terms of use | `src/pages/terms.astro` |
 
-## Before you launch: fill these in
+## Keep up to date
 
-Everything in **[square brackets]** is a placeholder:
-
-- **`src/content/company.ts`:** company name, RC number, address, policy date, the licensed partner line, and the emails (`hello@`, `privacy@`, `security@lorapay.io`). Make sure those mailboxes exist.
-- **`src/pages/index.astro`:** the FAQ answers about who holds customer money and the launch month.
-- **`src/pages/about.astro`:** the team.
-- **`src/pages/privacy.astro`, `src/pages/terms.astro`:** retention periods, hosting and SMS providers, the court. **Have a Nigerian lawyer review both (NDPA 2023)** before going live, then remove `draft` from the page.
-- **`src/pages/security.astro`:** whether you pay bug bounties.
-- **`public/.well-known/security.txt`, `public/robots.txt`:** replace `lorapay.io` if your domain is different, and renew the `Expires` date each year.
-- **`public/images/og.png`** (the image shown when the link is shared): change the domain on it if needed. It is generated from the brand files.
+- **`src/content/company.ts`:** Bridgewise Limited's details, the policy date and the partner line. Make sure the `hello@`, `privacy@` and `security@lorapay.io` mailboxes exist and are read.
+- **Patent:** once the Registry acknowledges the application, put its number in `patentApplication` in `company.ts`. The footer then shows "Patent pending". Until the application is filed, don't add technical detail about how offline payments are protected to any page.
+- **Privacy policies:** change `policyDate` whenever either policy changes. When the servers move to a Nigerian host, update "Data stored outside Nigeria" in `app-privacy.astro`. Have a Nigerian lawyer review both policies and the terms (NDPA 2023).
+- **`src/pages/about.astro`:** add a one-line `bio` for each founder if you want one shown.
+- **`public/.well-known/security.txt`, `public/robots.txt`:** renew the `Expires` date each year.
 
 ## Run it on your PC
 

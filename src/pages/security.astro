@@ -14,13 +14,13 @@ import { company } from '../content/company';
   </p>
 
   <h2>Payments without internet</h2>
-  <p>When you pay with no signal, your phone builds the payment and protects it in three ways before it leaves:</p>
+  <p>When you pay with no signal, your payment is protected on your phone before it leaves:</p>
   <ul>
-    <li><strong>Sealed for Lorapay only.</strong> The payment, including your PIN, is encrypted on your phone with a key only Lorapay's server holds. Phones that pass it along see a sealed packet: not the amount, not who you're paying, not your PIN.</li>
-    <li><strong>Signed by your phone.</strong> Your phone signs every payment with its own key, registered to your account. A payment changed by even one character on the way is refused.</li>
-    <li><strong>Sent once, paid once.</strong> Every payment has its own number. A copy delivered twice, or through two different phones, is paid only once, and old payments can't be replayed.</li>
+    <li><strong>Private.</strong> Phones that pass your payment along can't see the amount, who you're paying or your PIN.</li>
+    <li><strong>Tamper-proof.</strong> A payment that has been changed on the way is refused.</li>
+    <li><strong>Paid once.</strong> However many phones carry it, a payment is only ever paid once.</li>
   </ul>
-  <p>When it reaches Lorapay, it goes through the same checks as a payment made online: your PIN, your balance, your limits and the recipient. Nothing moves if any of them fails, and the answer travels back to your phone sealed and signed by Lorapay.</p>
+  <p>When it reaches Lorapay, it goes through the same checks as a payment made online: your PIN, your balance, your limits and the recipient. Nothing moves if any of them fails, and you get the result on your phone.</p>
 
   <h2>Protecting your account</h2>
   <ul>
@@ -53,7 +53,7 @@ import { company } from '../content/company';
   <h3>Our promise</h3>
   <p>
     If you follow these rules in good faith, we won't take legal action against you for your research, and we'll credit you
-    when the fix ships if you'd like. [Bug bounty: state whether you pay rewards, and how much.]
+    when the fix ships if you'd like. We don't offer cash rewards at the moment.
   </p>
   <p>Our <a href="/.well-known/security.txt">security.txt</a> has the same contact details for automated tools.</p>
 </Prose>

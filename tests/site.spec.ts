@@ -30,7 +30,7 @@ async function fillWaitlist(page: Page, scope = page.locator('#waitlist')) {
 
 test('every page loads with the strict security headers and no errors', async ({ page }) => {
   const errors = noConsoleErrors(page);
-  for (const path of ['/', '/waitlist', '/about', '/security', '/privacy', '/terms']) {
+  for (const path of ['/', '/waitlist', '/about', '/security', '/privacy', '/app-privacy', '/terms']) {
     await page.goto(path);
     await expect(page.locator('h1')).toBeVisible();
   }
@@ -42,7 +42,7 @@ test('every page loads with the strict security headers and no errors', async ({
 });
 
 test('no page scrolls sideways on a phone', async ({ page }) => {
-  for (const path of ['/', '/waitlist', '/about', '/security', '/privacy', '/terms']) {
+  for (const path of ['/', '/waitlist', '/about', '/security', '/privacy', '/app-privacy', '/terms']) {
     await page.goto(path);
     const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
     expect(overflow, path).toBeLessThanOrEqual(0);

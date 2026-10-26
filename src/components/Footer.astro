@@ -9,6 +9,9 @@ const year = new Date().getFullYear();
       <img src="/images/wordmark-white.png" alt="Lorapay" width="99" height="30" />
       <p>Pay anyone, online or offline.</p>
       <p class="legal">{company.legalLine}</p>
+      {company.patentApplication && (
+        <p class="legal">Patent pending: Nigerian patent application {company.patentApplication}.</p>
+      )}
     </div>
     <nav aria-label="Footer" class="cols">
       <div>
@@ -25,7 +28,8 @@ const year = new Date().getFullYear();
         <ul>
           <li><a href="/security">Security</a></li>
           <li><a href="/security#report">Report a vulnerability</a></li>
-          <li><a href="/privacy">Privacy policy</a></li>
+          <li><a href="/privacy">Website privacy policy</a></li>
+          <li><a href="/app-privacy">App privacy policy</a></li>
           <li><a href="/terms">Terms of use</a></li>
         </ul>
       </div>

@@ -1,0 +1,175 @@
+---
+import Prose from '../layouts/Prose.astro';
+import { company } from '../content/company';
+---
+
+<Prose
+  title="App privacy policy"
+  eyebrow="Your data"
+  description="How the Lorapay app collects, uses and protects your personal data, including payments made through nearby phones, under the Nigeria Data Protection Act 2023."
+  updated={company.policyDate}
+>
+  <p class="lead">
+    This policy covers the Lorapay app and the services behind it: your wallet, payments online and through nearby phones, airtime
+    and data, and customer support. It explains what personal data we collect, why, who we share it with and your rights under the
+    Nigeria Data Protection Act 2023 (NDPA). This website and its waitlist have their own <a href="/privacy">website privacy policy</a>.
+  </p>
+
+  <h2>Who we are</h2>
+  <p>
+    Lorapay is operated by {company.legalName} (RC {company.rcNumber}), {company.address}. {company.legalName} is the data controller
+    for the personal data described here. Our Data Protection Officer handles every privacy question and request.
+  </p>
+  <ul>
+    <li><strong>Privacy and data requests:</strong> <a href={`mailto:${company.privacyEmail}`}>{company.privacyEmail}</a></li>
+    <li><strong>General support:</strong> <a href={`mailto:${company.email}`}>{company.email}</a></li>
+    <li><strong>Security problems:</strong> <a href={`mailto:${company.securityEmail}`}>{company.securityEmail}</a></li>
+  </ul>
+  <p>
+    Your money is held by Anchor (Anchor Technologies) and the licensed banks it works with, not by Lorapay. Anchor is a separate
+    controller for the data it needs to open and run your account.
+  </p>
+
+  <h2>What we collect</h2>
+  <p>We collect only what we need to run your account and move your money safely.</p>
+  <table>
+    <thead><tr><th>Category</th><th>What it includes</th><th>Where it comes from</th></tr></thead>
+    <tbody>
+      <tr><td>Account details</td><td>First and last name, mobile number, email address, home address</td><td>You, when you sign up</td></tr>
+      <tr><td>Identity (KYC)</td><td>BVN, NIN, your verification tier and status</td><td>You, then confirmed by Anchor against the BVN and NIN records</td></tr>
+      <tr><td>Security</td><td>Your PIN (stored only as a one-way hash), wrong-PIN counts, SMS login codes</td><td>You and the app</td></tr>
+      <tr><td>Your phones</td><td>A device ID, phone model, Android version, the phone's public signing key, its mesh ID, and when it was last seen</td><td>The app</td></tr>
+      <tr><td>Payments</td><td>Amount, fee, date, status, reference, recipient's name, bank and account number, biller details, and whether the payment went online or through nearby phones</td><td>You and our payment partners</td></tr>
+      <tr><td>Saved recipients</td><td>Bank, account number and account name of people you pay</td><td>You</td></tr>
+      <tr><td>Relay rewards</td><td>Payments your phone delivered for others and the coupons earned</td><td>The app and our servers</td></tr>
+      <tr><td>Support</td><td>Disputes you raise and our messages with you</td><td>You and our staff</td></tr>
+      <tr><td>Connection data</td><td>IP address and app or browser details when you connect to our servers</td><td>Your phone</td></tr>
+    </tbody>
+  </table>
+  <p>
+    We don't read your contacts, photos, messages or files. We don't record your location: the Bluetooth permissions are used only to
+    find nearby Lorapay phones (see Payments without internet).
+  </p>
+
+  <h2>Why we use it</h2>
+  <p>Each use has a lawful basis under section 25 of the NDPA.</p>
+  <table>
+    <thead><tr><th>Purpose</th><th>Lawful basis</th></tr></thead>
+    <tbody>
+      <tr><td>Opening your wallet, sending and receiving money, airtime and data, receipts and history</td><td>Contract: we need it to provide the service you signed up for</td></tr>
+      <tr><td>Checking your BVN and NIN, setting your tier and daily limits, keeping payment records</td><td>Legal obligation: Central Bank of Nigeria KYC rules and anti-money-laundering law</td></tr>
+      <tr><td>Reporting suspicious activity and answering lawful requests from regulators and law enforcement</td><td>Legal obligation</td></tr>
+      <tr><td>Confirming it's you: PIN checks, SMS codes on new phones, blocking a PIN after repeated wrong attempts</td><td>Contract, and legitimate interests in protecting your account</td></tr>
+      <tr><td>Spotting fraud and abuse, such as flooding the Bluetooth network or replaying old payments</td><td>Legitimate interests in keeping Lorapay safe for everyone</td></tr>
+      <tr><td>Relaying payments through your phone and paying you relay rewards</td><td>Legitimate interests; you can turn relaying off in Settings</td></tr>
+      <tr><td>Transaction alerts by SMS</td><td>Consent, which you give in the app and can withdraw in Settings</td></tr>
+      <tr><td>Handling disputes and support requests</td><td>Contract and legitimate interests</td></tr>
+    </tbody>
+  </table>
+  <p>
+    We don't sell your data, use it for advertising, or make decisions about you by automated means alone that have legal or similar
+    effects. Limits and fraud checks run automatically, and you can ask a person to review any decision that affects you.
+  </p>
+
+  <h2>Who we share it with</h2>
+  <p>We share personal data only with the organisations below, and only what each needs.</p>
+  <table>
+    <thead><tr><th>Who</th><th>What they receive</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td>Anchor (Anchor Technologies) and its licensed partner banks</td><td>Account details, BVN, NIN, payment details</td><td>To verify your identity, hold your money, and send and receive transfers through the Nigerian banking system</td></tr>
+      <tr><td>Banks and billers you pay</td><td>Your name, the amount and the reference</td><td>To complete the payment you asked for</td></tr>
+      <tr><td>Termii</td><td>Your mobile number and the text of each SMS</td><td>To send login codes and the alerts you chose</td></tr>
+      <tr><td>Our server hosting provider</td><td>All data stored on our servers, in encrypted form where described below</td><td>To run Lorapay's servers</td></tr>
+      <tr><td>Regulators, courts and law enforcement</td><td>What the law or a valid order requires</td><td>Legal obligation</td></tr>
+    </tbody>
+  </table>
+  <p>
+    Service providers process data only on our instructions and under contract. If Lorapay is sold or merges with another company,
+    your data would pass to the new owner under this policy, and we would tell you first.
+  </p>
+
+  <h2>Payments without internet</h2>
+  <p>
+    When you have no signal, Lorapay can pass your payment through other Lorapay phones nearby over Bluetooth until one with internet
+    delivers it to us.
+  </p>
+  <ul>
+    <li><strong>What other phones can see:</strong> a sealed packet and your phone's mesh ID, a random code that doesn't contain your name or number. They can't read the amount, the recipient or your PIN.</li>
+    <li><strong>What we record:</strong> which phone sent the payment, which phone delivered it and how many phones it passed through. We use this to process the payment, stop it being paid twice, pay the delivering phone's relay reward and detect abuse.</li>
+    <li><strong>When your phone relays for others:</strong> it carries other people's sealed packets, which it can't open. If it delivers one, we record that your phone did, so we can credit your relay reward.</li>
+    <li><strong>Who you paid:</strong> after a payment through nearby phones, your receipt shows the recipient's first name and last initial, for example "Tunde B."</li>
+    <li><strong>Location:</strong> on Android 11 and older, Android asks for location permission before any app can scan for Bluetooth devices. Lorapay uses it only to find nearby phones and doesn't record or send your location.</li>
+  </ul>
+  <p>You can turn off relaying for others in Settings at any time. Online payments are not affected.</p>
+
+  <h2>How we protect it</h2>
+  <ul>
+    <li>Your PIN is never stored as typed: we keep only a one-way hash. Ten wrong PINs in a row block it until you reset it.</li>
+    <li>Your BVN and NIN are stored encrypted, and never written to our logs. Account numbers are masked in logs.</li>
+    <li>Your phone's key is kept inside Android's secure key store where the phone supports it.</li>
+    <li>All connections to our servers are encrypted (HTTPS), and the app checks that it is talking to Lorapay's real server.</li>
+    <li>Staff can open customer records only through our admin panel, which needs a password and an authenticator-app code. Staff actions are logged.</li>
+  </ul>
+  <p>
+    If a breach puts your data at risk, we will report it to the Nigeria Data Protection Commission within 72 hours of becoming aware
+    of it, as the NDPA requires. Where the risk to you is high, we will also tell you directly and say what you can do.
+  </p>
+
+  <h2>How long we keep it</h2>
+  <table>
+    <thead><tr><th>Data</th><th>How long</th></tr></thead>
+    <tbody>
+      <tr><td>Account, identity (KYC) and payment records</td><td>While your account is open, then at least 5 years after it closes, as Nigerian anti-money-laundering law requires</td></tr>
+      <tr><td>Saved recipients</td><td>Until you delete them or close your account</td></tr>
+      <tr><td>SMS login codes</td><td>Until used or expired, within minutes</td></tr>
+      <tr><td>Phone records and mesh delivery records</td><td>While your account is open, then with your payment records</td></tr>
+      <tr><td>Disputes and support messages</td><td>5 years after the dispute or request is closed</td></tr>
+    </tbody>
+  </table>
+  <p>When a retention period ends, we delete the data or anonymise it so it no longer identifies you.</p>
+
+  <h2>Data stored outside Nigeria</h2>
+  <p>
+    Lorapay's servers are currently hosted in the United States, and we are moving them to a host in Nigeria. Until then, the data on
+    our servers is transferred to and stored in the United States. We protect these transfers with the safeguards that sections 41 to
+    43 of the NDPA require, including a contract binding our hosting provider to protect the data to NDPA standards. We will update
+    this policy when the move is complete.
+  </p>
+
+  <h2>Your rights</h2>
+  <p>Under the NDPA you can ask us to:</p>
+  <ul>
+    <li>tell you what personal data we hold about you and give you a copy;</li>
+    <li>correct data that is wrong or incomplete;</li>
+    <li>delete your data, where we are not required by law to keep it;</li>
+    <li>restrict how we use it, or object to a use based on our legitimate interests;</li>
+    <li>give you your data, or send it to another organisation, in a common machine-readable format;</li>
+    <li>have a person review a decision made automatically that affects you;</li>
+    <li>withdraw any consent you gave, without affecting what we did before you withdrew it.</li>
+  </ul>
+  <p>
+    Email <a href={`mailto:${company.privacyEmail}`}>{company.privacyEmail}</a> from the email address on your account, or mention the
+    mobile number you use with Lorapay. We may ask you to confirm your identity before acting. We answer within 30 days, and there is
+    no charge.
+  </p>
+  <p>
+    Your payment history and saved recipients are always visible in the app. You can close your account by contacting support; we then
+    keep only the records the law requires, for the periods above.
+  </p>
+  <p>
+    If you are unhappy with our answer, you can complain to the Nigeria Data Protection Commission at
+    <a href="https://ndpc.gov.ng">ndpc.gov.ng</a>.
+  </p>
+
+  <h2>Children</h2>
+  <p>
+    Lorapay is for people aged 18 and over. We don't knowingly open accounts for anyone younger. If we learn that we have, we close the
+    account and delete the data, except records the law requires us to keep.
+  </p>
+
+  <h2>Changes to this policy</h2>
+  <p>
+    When we change this policy, we update the date at the top. If a change affects how we use your data, we tell you in the app or by
+    SMS before it takes effect.
+  </p>
+</Prose>

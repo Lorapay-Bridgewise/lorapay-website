@@ -3,7 +3,7 @@ import Prose from '../layouts/Prose.astro';
 import { company } from '../content/company';
 ---
 
-<Prose title="Terms of use" eyebrow="The small print" description="The terms for using the Lorapay website and joining its waitlist." updated={company.policyDate} draft>
+<Prose title="Terms of use" eyebrow="The small print" description="The terms for using the Lorapay website and joining its waitlist." updated={company.policyDate}>
   <p class="lead">
     These terms cover this website and the Lorapay waitlist, provided by {company.legalName} (RC {company.rcNumber}). Using the
     Lorapay app will be covered by separate terms when it launches.
@@ -13,7 +13,8 @@ import { company } from '../content/company';
   <p>
     This website describes a service that is still being built. It does not offer payment, banking or any other financial
     service, and nothing on it is financial advice. Features, limits and launch dates may change before launch.
-    [When live: state the licensed partner that provides the payment services.]
+    When Lorapay opens, customer money will be held through Anchor (Anchor Technologies) and its licensed partner banks, not by
+    {company.legalName}.
   </p>
 
   <h2>The waitlist</h2>
@@ -23,7 +24,7 @@ import { company } from '../content/company';
     <li>Please give your own, accurate details. You must be 18 or older.</li>
     <li>You can leave at any time by emailing <a href={`mailto:${company.privacyEmail}`}>{company.privacyEmail}</a>.</li>
   </ul>
-  <p>How we handle your details is explained in our <a href="/privacy">privacy policy</a>.</p>
+  <p>How we handle your details is explained in our <a href="/privacy">website privacy policy</a>.</p>
 
   <h2>Using this website</h2>
   <p>Please don't misuse the site: no attempts to break or overload it, no automated sign-ups, and no false or other people's details.</p>
@@ -45,7 +46,7 @@ import { company } from '../content/company';
   <h2>Changes and law</h2>
   <p>
     We may update these terms; the date at the top shows the latest version. These terms are governed by the laws of the Federal
-    Republic of Nigeria, and the courts of [Lagos State] have jurisdiction.
+    Republic of Nigeria, and the courts of Lagos State have jurisdiction.
   </p>
 
   <h2>Contact</h2>

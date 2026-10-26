@@ -3,10 +3,10 @@ import Base from '../layouts/Base.astro';
 import ContactForm from '../components/ContactForm.astro';
 import { company } from '../content/company';
 
-// Fill in your team. Photos are optional; initials are shown otherwise.
-const team = [
-  { name: '[Founder name]', role: 'Co-founder & CEO', bio: '[One or two lines: background, why Lorapay.]' },
-  { name: '[Founder name]', role: 'Co-founder & CTO', bio: '[One or two lines: background, what they build.]' },
+// The team. Add a one- or two-line `bio` to show it under the role. Initials are shown in place of photos.
+const team: { name: string; role: string; bio?: string }[] = [
+  { name: 'Chimobi Ogudu', role: 'Co-founder & CEO' },
+  { name: 'Oluwafemi Jacob', role: 'Co-founder & CTO' },
 ];
 const initials = (n: string) => n.replace(/[[\]]/g, '').split(/\s+/).map(w => w[0] ?? '').join('').slice(0, 2).toUpperCase();
 ---
@@ -49,7 +49,7 @@ const initials = (n: string) => n.replace(/[[\]]/g, '').split(/\s+/).map(w => w[
           <div>
             <h3>{p.name}</h3>
             <p class="role">{p.role}</p>
-            <p>{p.bio}</p>
+            {p.bio && <p>{p.bio}</p>}
           </div>
         </div>
       ))}
